@@ -1,0 +1,21 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader/subproject",
+    "build_dir":          "/home/ubuntu/Desktop/balance_car/build/bootloader",
+    "config_file":        "/home/ubuntu/Desktop/balance_car/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.4-dev-3042-g220590d599",
+    "target":             "esp32",
+    "rev":                "0",
+    "phy_data_partition": "",
+    "monitor_baud" :      "115200",
+    "monitor_toolprefix": "xtensa-esp32-elf-",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "/home/ubuntu/Desktop/esp/esp-idf/components/efuse/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/esp32/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/esp_common/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/esp_hw_support/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/esp_system/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/freertos/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/hal/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/log/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/newlib/Kconfig;/home/ubuntu/Desktop/esp/esp-idf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader/Kconfig.projbuild;/home/ubuntu/Desktop/esp/esp-idf/components/esp_rom/Kconfig.projbuild;/home/ubuntu/Desktop/esp/esp-idf/components/esptool_py/Kconfig.projbuild;/home/ubuntu/Desktop/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_hw_support", "esp_rom", "esp_system", "esptool_py", "freertos", "hal", "log", "main", "micro-ecc", "newlib", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader", "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader_support", "/home/ubuntu/Desktop/esp/esp-idf/components/efuse", "/home/ubuntu/Desktop/esp/esp-idf/components/esp32", "/home/ubuntu/Desktop/esp/esp-idf/components/esp_common", "/home/ubuntu/Desktop/esp/esp-idf/components/esp_hw_support", "/home/ubuntu/Desktop/esp/esp-idf/components/esp_rom", "/home/ubuntu/Desktop/esp/esp-idf/components/esp_system", "/home/ubuntu/Desktop/esp/esp-idf/components/esptool_py", "/home/ubuntu/Desktop/esp/esp-idf/components/freertos", "/home/ubuntu/Desktop/esp/esp-idf/components/hal", "/home/ubuntu/Desktop/esp/esp-idf/components/log", "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader/subproject/main", "/home/ubuntu/Desktop/esp/esp-idf/components/bootloader/subproject/components/micro-ecc", "/home/ubuntu/Desktop/esp/esp-idf/components/newlib", "/home/ubuntu/Desktop/esp/esp-idf/components/partition_table", "/home/ubuntu/Desktop/esp/esp-idf/components/soc", "/home/ubuntu/Desktop/esp/esp-idf/components/spi_flash", "/home/ubuntu/Desktop/esp/esp-idf/components/xtensa", "" ]
+}
