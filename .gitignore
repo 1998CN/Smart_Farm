@@ -1,2 +1,6 @@
-/build
+/build/*
 /.vscode
+
+sdkconfig.old
+
+!/build/smart_farm.bin
