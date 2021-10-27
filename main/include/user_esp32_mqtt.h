@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 
-esp_err_t user_create_mqtt_client(void);
-esp_err_t user_delete_mqtt_client(void);
+esp_err_t user_esp32_create_mqtt_client(void);
+esp_err_t user_esp32_delete_mqtt_client(void);
 
 #ifdef __cplusplus
 }

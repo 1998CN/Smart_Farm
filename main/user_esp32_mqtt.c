@@ -95,7 +95,7 @@
     {                                                                           \
         if ((x) == -1)                                                          \
         {                                                                       \
-            ESP_LOGE("MQTT MSG ID ERROR", "%s-%d-%d.", __FILE__, __LINE__, #x); \
+            ESP_LOGE("MQTT MSG ID ERROR", "%s-%d-%s.", __FILE__, __LINE__, #x); \
         }                                                                       \
     } while (0)
 
@@ -208,7 +208,7 @@ static void mqtt_msg_proc_task(void * pvParameters)
                 if (memcmp(mqtt_msg.data, "start", mqtt_msg.data_len) == 0)
                 {
                     /* Start HTTPS OTA Service. */
-                    user_start_ota_service();
+                    user_esp32_start_ota_service();
                 }
             }
             // else
@@ -370,7 +370,7 @@ static void mqtt_event_handler(void *args, esp_event_base_t event_base, int32_t 
  * @return - ESP_OK   succeed
  *         - ESP_FAIL failed
  */
-esp_err_t user_create_mqtt_client(void)
+esp_err_t user_esp32_create_mqtt_client(void)
 {
     esp_err_t ret;
 
@@ -435,7 +435,7 @@ esp_err_t user_create_mqtt_client(void)
  * @return - ESP_OK   succeed
  *         - ESP_FAIL failed
  */
-esp_err_t user_delete_mqtt_client(void)
+esp_err_t user_esp32_delete_mqtt_client(void)
 {
     if(mqtt_client != NULL)
     {

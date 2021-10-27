@@ -15,7 +15,16 @@
 extern "C" {
 #endif
 
+/* Wi-Fi connection status. */
+typedef enum
+{
+    ESP32_WIFI_NOT_INIT,
+    ESP32_WIFI_CONNECTED,
+    ESP32_WIFI_DISCONNECTED
+} esp_wifi_status_t;
+
 esp_err_t user_esp32_wifi_init(void);
+esp_wifi_status_t user_esp32_wifi_get_status(void);
 
 #ifdef __cplusplus
 }

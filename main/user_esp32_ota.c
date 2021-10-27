@@ -295,7 +295,7 @@ esp_err_t user_esp32_ota_data_verification(void)
  * @return  - ESP_OK    succeed.
  *          - ESP_FAIL  failed.
  */
-esp_err_t user_create_ota_service(void)
+esp_err_t user_esp32_create_ota_service(void)
 {
     /* Create ESP32 HTTP(S) OTA service task. */
     if (https_ota_task_handle == NULL)
@@ -324,7 +324,7 @@ esp_err_t user_create_ota_service(void)
  * @return  - ESP_OK    succeed.
  *          - ESP_FAIL  failed.
  */
-esp_err_t user_start_ota_service(void)
+esp_err_t user_esp32_start_ota_service(void)
 {
     /* Check HTTP(S) OTA event groups handle. */
     if(https_ota_event_groups_handle == NULL)
@@ -352,7 +352,7 @@ esp_err_t user_start_ota_service(void)
  * @return  - ESP_OK    succeed.
  *          - ESP_FAIL  failed.
  */
-esp_err_t user_delete_ota_service(void)
+esp_err_t user_esp32_delete_ota_service(void)
 {
     /* Delete HTTP(S) OTA Service EventGroups. */
     if (https_ota_event_groups_handle != NULL)

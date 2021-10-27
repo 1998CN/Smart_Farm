@@ -16,9 +16,9 @@ extern "C" {
 #endif
 
 esp_err_t user_esp32_ota_data_verification(void);
-esp_err_t user_create_ota_service(void);
-esp_err_t user_start_ota_service(void);
-esp_err_t user_delete_ota_service(void);
+esp_err_t user_esp32_create_ota_service(void);
+esp_err_t user_esp32_start_ota_service(void);
+esp_err_t user_esp32_delete_ota_service(void);
 
 #ifdef __cplusplus
 }
