@@ -3,7 +3,7 @@
  * @file    : user_esp32_ota.h
  * @brief   : ESP32 OAT service Application
  * @author  : Cao Jin
- * @date    : 20-Oct-2021
+ * @date    : 27-Oct-2021
  * @version : 1.0.0
  *****************************************************************************
  */
@@ -15,9 +15,10 @@
 extern "C" {
 #endif
 
-
-
-void user_esp32_ota_data_verification(void);
+esp_err_t user_esp32_ota_data_verification(void);
+esp_err_t user_create_ota_service(void);
+esp_err_t user_start_ota_service(void);
+esp_err_t user_delete_ota_service(void);
 
 #ifdef __cplusplus
 }

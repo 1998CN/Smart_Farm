@@ -15,5 +15,17 @@
 
 esp_err_t user_esp32_i2c_init(void)
 {
-    return ESP_OK;
+    i2c_port_t i2c_port = DEFAULT_ESP32_I2C_NUM;
+    i2c_config_t i2c_config = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = DEFAULT_ESP32_I2C_SDA,
+        .scl_io_num = DEFAULT_ESP32_I2C_SCL,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = DEFAULT_ESP32_I2C_FREQ_HZ,
+    };
+
+    i2c_param_config(i2c_port, &i2c_config);
+
+    return i2c_driver_install(i2c_port, i2c_config.mode, 0, 0, 0);
 }

@@ -37,7 +37,7 @@ static void user_esp32_print_chip_info(void)
 {
     esp_chip_info_t chip_info;
     esp_chip_info(&chip_info);
-    ESP_LOGI(CHIP_INFO_TAG, "This is %s chip with %d CPU core(s), WiFi%s%s, silicon revision %d, %dMB %s flash",
+    ESP_LOGI("Chip information", "This is %s chip with %d CPU core(s), WiFi%s%s, silicon revision %d, %dMB %s flash",
              CONFIG_IDF_TARGET,
              chip_info.cores,
              (chip_info.features & CHIP_FEATURE_BT) ? "/BT" : "",
@@ -45,7 +45,7 @@ static void user_esp32_print_chip_info(void)
              chip_info.revision,
              spi_flash_get_chip_size() / (1024 * 1024),
              (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
-    ESP_LOGI(CHIP_INFO_TAG, "Minimum free heap size: %d bytes", esp_get_minimum_free_heap_size());
+    ESP_LOGI("Chip information", "Minimum free heap size: %d bytes", esp_get_minimum_free_heap_size());
 }
 
 void app_main(void)

@@ -16,6 +16,14 @@
 
 esp_err_t user_esp32_hardware_init(void)
 {
+    /* Initialize sn74hc595. */
+    
+
+    return ESP_OK;
+}
+
+esp_err_t user_esp32_hardware_deinit(void)
+{
     return ESP_OK;
 }
 

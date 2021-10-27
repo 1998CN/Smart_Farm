@@ -27,12 +27,9 @@
 #define SET_SN74HC595_SCK_H() gpio_set_level(SN74HC595_SCK_PIN, 1)
 #define SET_SN74HC595_SCK_L() gpio_set_level(SN74HC595_SCK_PIN, 0)
 
-static const char *TAG = "74hc595 application";
-
-union ch595_data_t ch595_data;
-
-void sn74hc595_init(void)
+esp_err_t sn74hc595_init(void)
 {
+    esp_err_t ret = ESP_OK;
     gpio_config_t io_config;
 
     io_config.pin_bit_mask = (1ULL << SN74HC595_SDA_PIN) | (1ULL << SN74HC595_RCK_PIN) | (1ULL << SN74HC595_SCK_PIN);
@@ -41,14 +38,16 @@ void sn74hc595_init(void)
     io_config.pull_up_en = GPIO_PULLUP_DISABLE;
     io_config.intr_type = GPIO_PIN_INTR_DISABLE;
 
-    gpio_config(&io_config);
+    ret = gpio_config(&io_config);
 
     SET_SN74HC595_SDA_L();
     SET_SN74HC595_RCK_L();
     SET_SN74HC595_SCK_L();
+
+    return ret;
 }
 
-bool sn74hc595_send_data(void *_data)
+esp_err_t sn74hc595_send_data(void *_data)
 {
     uint8_t *send_data = NULL;
     uint8_t send_length = 0;

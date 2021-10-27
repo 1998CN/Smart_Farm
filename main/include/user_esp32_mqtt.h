@@ -3,7 +3,7 @@
  * @file    : user_esp32_mqtt.h
  * @brief   : ESP32 MQTT Application
  * @author  : Cao Jin
- * @date    : 19-Oct-2021
+ * @date    : 27-Oct-2021
  * @version : 1.0.0 
  *****************************************************************************
  */
@@ -15,13 +15,8 @@
 extern "C" {
 #endif
 
-/**
- * @brief  Create MQTT client
- * 
- * @return - ESP_OK: succeed
- *         - others: failure
- */
 esp_err_t user_create_mqtt_client(void);
+esp_err_t user_delete_mqtt_client(void);
 
 #ifdef __cplusplus
 }

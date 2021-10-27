@@ -11,6 +11,8 @@
 #include "esp_err.h"
 #include "esp_log.h"
 
+#include "led_strip.h"
+
 #include "user_esp32_rmt.h"
 
 esp_err_t user_esp32_rmt_init(void)

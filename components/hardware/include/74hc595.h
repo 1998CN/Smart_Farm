@@ -24,20 +24,24 @@ extern "C" {
 
 /**
   * @brief Initialize sn74hc595 chip.
+  * 
+  * @return -ESP_OK succeed.
+  *         -other  failed.
   */
-void sn74hc595_init(void);
+esp_err_t sn74hc595_init(void);
 
 /**
   * @brief  Set the output value of the sn74hc595 device.
   * 
   * @param[IN]
-  *     - _data output value 8/16/24/32 ... Bits
+  *     - _data output value 8/16/24/32 ... Bits.
   * 
   * @return
-  *     - true : succeed
-  *     - false: failure
+  *     - ESP_OK:   succeed.
+  *     - ESP_FAIL: failed.
+  *
   */
-bool sn74hc595_send_data(void *_data);
+esp_err_t sn74hc595_send_data(void *_data);
 
 #ifdef __cplusplus
 }
