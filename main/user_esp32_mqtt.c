@@ -38,16 +38,8 @@
 /** @brief Default MQTT used Quality of Service. */
 #define MQTT_QOS_LEVEL                      MQTT_QOS_0
 
-
-/** @brief MQTT message queue maximum topic length. (char) */
-#define MAXIMUM_MQTT_TOPIC_LENGTH           (30U)
-
-/** @brief MQTT message queue maximum data length. (char) */
-#define MAXIMUM_MQTT_DATA_LENGTH            (30U)
-
 /** @brief MQTT message queue maximum length. (esp_mqtt_message_t) */
 #define MAXIMUM_MQTT_MSG_LENGTH             (10U)
-
 
 /** @brief Complete MQTT broker URI  */
 #define DEFAULT_MQTT_BROKER_URL             "mqtt://47.102.193.111:1883" 
@@ -99,12 +91,12 @@
         }                                                                       \
     } while (0)
 
-/** @brief MQTT message structure. */
+/** @brief MQTT message structure.  */
 typedef struct
 {
-    char topic[MAXIMUM_MQTT_TOPIC_LENGTH];
+    char * topic;
     int topic_len;
-    char data[MAXIMUM_MQTT_DATA_LENGTH];
+    char* data;
     int data_len;
 }esp_mqtt_message_t;
 
@@ -217,6 +209,10 @@ static void mqtt_msg_proc_task(void * pvParameters)
             //     ESP_LOGE(TAG, "TOPIC: %s.", mqtt_msg.topic);
             //     ESP_LOGE(TAG, "DATA: %s.", mqtt_msg.data);
             // }
+
+            /* Release memory resources. */
+            free(mqtt_msg.topic);
+            free(mqtt_msg.data);
         }
         else
         {
@@ -233,8 +229,8 @@ static void user_mqtt_topic_init(esp_mqtt_client_handle_t client)
 {
     /* Subscribe to MQTT topics */
     ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_SWITCH_VALVE_STATE1, MQTT_QOS_LEVEL));
-    ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_SWITCH_VALVE_STATE1, MQTT_QOS_LEVEL));
-    ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_SWITCH_VALVE_STATE1, MQTT_QOS_LEVEL));
+    ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_SWITCH_VALVE_STATE2, MQTT_QOS_LEVEL));
+    ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_SWITCH_VALVE_STATE3, MQTT_QOS_LEVEL));
     ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_PUMP_STATE1, MQTT_QOS_LEVEL));
     ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_RGB_STATE1, MQTT_QOS_LEVEL));
     ESP_MQTT_MSG_ID_CHECK(esp_mqtt_client_subscribe(client, SUB_RGB_STATE2, MQTT_QOS_LEVEL));
@@ -271,11 +267,8 @@ static void user_mqtt_topic_init(esp_mqtt_client_handle_t client)
  * @brief  Wi-Fi Station Mode Event Group CallBack.
  * 
  * @param args[IN] user data registered to the event.
- * 
  * @param event_base[IN] Event base for the handler.
- * 
  * @param event_id[IN] The id for the received event.
- * 
  * @param event_data[IN] The data for the event
  */
 static void mqtt_event_handler(void *args, esp_event_base_t event_base, int32_t event_id, void *event_data)
@@ -318,35 +311,25 @@ static void mqtt_event_handler(void *args, esp_event_base_t event_base, int32_t 
     {
         ESP_LOGI(TAG, "Received message, Topic=%.*s.", event->topic_len, event->topic);
 
-        /* Determine the length of the topic received. */
-        if(event->topic_len < MAXIMUM_MQTT_TOPIC_LENGTH)
+        /* Received MQTT topic. */
+        msg.topic = calloc(event->topic_len, sizeof(char));
+        if (msg.topic == NULL)
         {
-            /* Complete information. */
-            memcpy(msg.topic, event->topic, event->topic_len);
-            msg.topic_len = event->topic_len;
+            ESP_LOGE(TAG, "Heap memory application failed when MQTT receiving topic.");
+            break;
         }
-        else
-        {
-            ESP_LOGE(TAG, "The length of the topic received is too long.");
-            /* Truncation information. */
-            memcpy(msg.topic, event->topic, MAXIMUM_MQTT_TOPIC_LENGTH);
-            msg.topic_len = MAXIMUM_MQTT_TOPIC_LENGTH;
-        }
+        msg.topic_len = event->topic_len;
+        memcpy(msg.topic, event->topic, msg.topic_len);
 
-        /* Determine the length of topic received. */
-        if (event->data_len < MAXIMUM_MQTT_DATA_LENGTH)
+        /* Received MQTT data. */
+        msg.data = calloc(event->data_len, sizeof(char));
+        if (msg.data == NULL)
         {
-            /* Complete information. */
-            memcpy(msg.data, event->data, event->data_len);
-            msg.data_len = event->data_len;
+            ESP_LOGE(TAG, "Heap memory application failed when MQTT receiving data.");
+            break;
         }
-        else
-        {
-            ESP_LOGE(TAG, "The length of data received is too long.");
-            /* Truncation information. */
-            memcpy(msg.data, event->data, MAXIMUM_MQTT_DATA_LENGTH);
-            msg.data_len = MAXIMUM_MQTT_DATA_LENGTH;
-        }
+        msg.data_len = event->data_len;
+        memcpy(msg.data, event->data, msg.data_len);
 
         /* Send topic messages to the MQTT message queue */
         xQueueSend(mqtt_msg_queue_handle, &msg, portMAX_DELAY);

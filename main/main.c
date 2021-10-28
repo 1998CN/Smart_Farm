@@ -46,7 +46,7 @@ void app_main(void)
     /* Initialize I2C. */
     user_esp32_i2c_init();
     /* Initialize UART. */
-    user_esp32_uart_init();
+    // user_esp32_uart_init();
     /* Initialize PWM. */
     user_esp32_pwm_init();
     /* Initialize RMT. */

@@ -41,7 +41,7 @@
 
 /** @brief Complete HTTP(S) OTA broker URL. */
 #define ESP32_HTTP_OTA_BROKER_URL                       "http://47.102.193.111/smart_farm.bin" 
-                                                        //"HTTP(S)://192.168.16.128/smart_farm.bin"
+                                                        //"https://192.168.16.128/smart_farm.bin"
 /** @brief Network timeout in milliseconds. */
 #define ESP32_HTTP_OTA_REV_TIMEOUT                      (5000U)
 
@@ -313,9 +313,7 @@ esp_err_t user_esp32_create_ota_service(void)
         }
         ESP_LOGI(TAG, "HTTP(S) OTA service created successfully.");
     }
-
-    ESP_LOGI(TAG, "HTTP(S) OTA service has been created.");
-
+    
     return ESP_OK;
 }
 /**

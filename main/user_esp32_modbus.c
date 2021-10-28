@@ -13,9 +13,13 @@
 #include "esp_err.h"
 #include "esp_log.h"
 
+#include "mbcontroller.h"
+
 #include "user_esp32_modbus.h"
 
 esp_err_t user_esp32_modbus_init(void)
 {
+
+
     return ESP_OK;
 }

@@ -290,11 +290,8 @@ static esp_err_t user_stop_wifi_smartconfig_service(void)
  * @brief  Wi-Fi Station Mode Event Group CallBack.
  *
  * @param args[IN] user data registered to the event.
- *
  * @param event_base[IN] Event base for the handler.
- *
  * @param event_id[IN] The id for the received event.
- *
  * @param event_data[IN] The data for the event.
  */
 static void wifi_sta_event_handler(void *args, esp_event_base_t event_base, int32_t event_id, void *event_data)
